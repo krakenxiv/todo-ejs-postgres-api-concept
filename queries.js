@@ -1,5 +1,7 @@
 const { response } = require('express');
 
+// TODO!! write basic tests
+
 const Pool = require('pg').Pool;
 const pool = new Pool({
   user: 'timz_mini',
@@ -44,11 +46,8 @@ const createTodo = (req, res) => {
 };
 
 const updateTodo = (req, res) => {
-  // const { id, todo_name, todo_description, completed } = req.body;
   if (req.body.id) {
     const values = [req.body.id, req.body.todo_name, req.body.todo_description, req.body.completed];
-
-    console.log(values);
     pool.query(
       'UPDATE todos SET todo_name = $2, todo_description = $3, completed = $4 WHERE id = $1',
       values,
@@ -57,7 +56,8 @@ const updateTodo = (req, res) => {
           throw error;
         }
         // send back whatever you want your app to consume
-        return res.status(201).send({values});
+        // return res.status(201).send({values});
+        return res.status(201).send({id: values[0] , todo_name: values[1], todo_description: values[2], completed: values[3]});
       }
     );
   }
@@ -65,7 +65,6 @@ const updateTodo = (req, res) => {
 
 const deleteTodo = (req, res) => {
   const id = req.params.id;
-  console.log(id);
    // pool.query(`DELETE FROM todos WHERE id = ${id}`, [ id ], (error, results) => {
    pool.query(`DELETE FROM todos WHERE id = ${id}`, (error, results) => {
     if (error) {
