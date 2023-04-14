@@ -12,7 +12,7 @@ const pool = new Pool({
 });
 
 const getTodos = (req, res) => {
-  pool.query('SELECT * FROM todos ORDER BY id DESC', (error, results) => {
+  pool.query('SELECT * FROM todos', (error, results) => {
     if (error) {
       throw error;
     }
@@ -53,6 +53,7 @@ const updateTodo = (req, res) => {
       values,
       (error, results) => {
         if (error) {
+          console.log(error);
           throw error;
         }
         // send back whatever you want your app to consume
