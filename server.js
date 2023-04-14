@@ -33,4 +33,3 @@ app.listen(port, () => {
   console.log(`App is running on port ${port}`);
 });
 
-// app.get('/todo/:id', cors(corsOptions), db.getTodoById);
