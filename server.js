@@ -1,12 +1,17 @@
 const express = require('express');
+const db = require('./queries');
 var cors = require('cors');
 const bodyParser = require('body-parser');
-const db = require('./queries');
 const { response } = require('express');
+const helmet = require('helmet');
+const morgan = require('morgan');
+
 const app = express();
 const port = 3010;
-
+app.use(helmet());
 app.use(bodyParser.json());
+app.use(morgan('combined'));
+
 app.use(
   bodyParser.urlencoded({
     extended: false,
@@ -32,4 +37,3 @@ app.delete('/todos/:id', db.deleteTodo);
 app.listen(port, () => {
   console.log(`App is running on port ${port}`);
 });
-
