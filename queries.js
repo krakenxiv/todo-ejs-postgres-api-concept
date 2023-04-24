@@ -3,12 +3,13 @@ const { response } = require('express');
 // TODO!! write basic tests
 
 const Pool = require('pg').Pool;
+
 const pool = new Pool({
-  user: 'timz_mini',
-  host: 'localhost',
-  database: 'todo_app',
-  password: '',
-  port: 5432,
+  user: process.env.SBASE_USER,
+  host: process.env.SBASE_HOST,
+  database: process.env.SBASE_DB,
+  password: process.env.SBASE_PW,
+  port: process.env.SBASE_PORT,
 });
 
 const getTodos = (req, res) => {
@@ -47,7 +48,12 @@ const createTodo = (req, res) => {
 
 const updateTodo = (req, res) => {
   if (req.body.id) {
-    const values = [req.body.id, req.body.todo_name, req.body.todo_description, req.body.completed];
+    const values = [
+      req.body.id,
+      req.body.todo_name,
+      req.body.todo_description,
+      req.body.completed,
+    ];
     pool.query(
       'UPDATE todos SET todo_name = $2, todo_description = $3, completed = $4 WHERE id = $1',
       values,
@@ -58,7 +64,12 @@ const updateTodo = (req, res) => {
         }
         // send back whatever you want your app to consume
         // return res.status(201).send({values});
-        return res.status(201).send({id: values[0] , todo_name: values[1], todo_description: values[2], completed: values[3]});
+        return res.status(201).send({
+          id: values[0],
+          todo_name: values[1],
+          todo_description: values[2],
+          completed: values[3],
+        });
       }
     );
   }
@@ -66,20 +77,20 @@ const updateTodo = (req, res) => {
 
 const deleteTodo = (req, res) => {
   const id = req.params.id;
-   // pool.query(`DELETE FROM todos WHERE id = ${id}`, [ id ], (error, results) => {
-   pool.query(`DELETE FROM todos WHERE id = ${id}`, (error, results) => {
+  // pool.query(`DELETE FROM todos WHERE id = ${id}`, [ id ], (error, results) => {
+  pool.query(`DELETE FROM todos WHERE id = ${id}`, (error, results) => {
     if (error) {
-     throw error;
-   }
-   // send back whatever you want your app to consume
+      throw error;
+    }
+    // send back whatever you want your app to consume
     return res.status(200).send(id);
-   });
-  };
+  });
+};
 
 module.exports = {
   getTodos,
   getTodoById,
   createTodo,
   updateTodo,
-  deleteTodo
+  deleteTodo,
 };
