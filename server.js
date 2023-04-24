@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const db = require('./queries');
 var cors = require('cors');
@@ -18,7 +19,7 @@ app.use(
   })
 );
 var corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: [process.env.TODO_UI_LOCAL_HOST, process.env.TODO_DATA_HOST],
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
