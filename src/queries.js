@@ -86,7 +86,6 @@ const updateTodo = (req, res) => {
 
 const deleteTodo = (req, res) => {
   const id = req.params.id;
-  // pool.query(`DELETE FROM todos WHERE id = ${id}`, [ id ], (error, results) => {
   pool.query(`DELETE FROM todos WHERE id = ${id}`, (error, results) => {
     if (error) {
       throw error;
