@@ -1,4 +1,5 @@
 const { response } = require('express');
+// import sql from './db.js';
 
 // TODO!! write basic tests
 
@@ -20,6 +21,14 @@ const getTodos = (req, res) => {
     res.status(200).json(results.rows);
   });
 };
+
+// const getTodos = async (req, res) => {
+//   const todos = await sql`
+//     SELECT * FROM todos
+//   `;
+//   // users = Result [{ name: "Walter", age: 80 }, { name: 'Murray', age: 68 }, ...]
+//   return todos;
+// };
 
 const getTodoById = (req, res) => {
   const id = parseInt(req.params.id);
@@ -59,7 +68,7 @@ const updateTodo = (req, res) => {
       values,
       (error, results) => {
         if (error) {
-          console.log(error);
+          // console.log(error);
           throw error;
         }
         // send back whatever you want your app to consume
