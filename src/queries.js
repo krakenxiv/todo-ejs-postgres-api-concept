@@ -90,7 +90,7 @@ const deleteTodo = (req, res) => {
     if (error) {
       throw error;
     }
-    // send back whatever you want your app to consume
+    //  send back whatever you want your app to consume
     return res.status(200).send(id);
   });
 };
