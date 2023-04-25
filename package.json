@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "NODE_OPTIONS=--openssl-legacy-provider netlify-lambda serve src",
-    "build": "netlify-lambda build src"
+    "build": "NODE_OPTIONS=--openssl-legacy-provider netlify-lambda build src"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +26,8 @@
     "serverless-http": "^3.2.0"
   },
   "overrides": {
-    "libpq": "1.8.12"
+    "pg": {
+      "libpq": "latest"
+    }
   }
 }
