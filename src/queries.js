@@ -1,5 +1,6 @@
-// TODO!! write basic tests
 const { response } = require('express');
+
+// TODO!! write basic tests
 
 const Pool = require('pg').Pool;
 
@@ -58,7 +59,7 @@ const updateTodo = (req, res) => {
       values,
       (error, results) => {
         if (error) {
-          // console.log(error);
+          console.log(error);
           throw error;
         }
         // send back whatever you want your app to consume
@@ -76,11 +77,12 @@ const updateTodo = (req, res) => {
 
 const deleteTodo = (req, res) => {
   const id = req.params.id;
+  // pool.query(`DELETE FROM todos WHERE id = ${id}`, [ id ], (error, results) => {
   pool.query(`DELETE FROM todos WHERE id = ${id}`, (error, results) => {
     if (error) {
       throw error;
     }
-    //  send back whatever you want your app to consume
+    // send back whatever you want your app to consume
     return res.status(200).send(id);
   });
 };
