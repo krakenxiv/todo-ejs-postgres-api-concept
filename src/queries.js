@@ -1,6 +1,5 @@
-const { response } = require('express');
-
 // TODO!! write basic tests
+const { response } = require('express');
 
 const Pool = require('pg').Pool;
 
