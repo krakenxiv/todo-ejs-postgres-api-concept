@@ -1,6 +1,20 @@
-const { response } = require('express');
-
 // TODO!! write basic tests
+const { response } = require('express');
+// const postgres = require('postgres');
+// // const db = require('./db');
+// // const { sql } = require('./db');
+
+// async function getTodos(req, res) {
+//   const users = await sql`
+//     select * from todos
+//   `;
+//   console.log(users[1]);
+//   // users = Result [{ name: "Walter", age: 80 }, { name: 'Murray', age: 68 }, ...]
+//   return users;
+//   // res.status(200).json(users);
+// }
+
+// getTodos();
 
 const Pool = require('pg').Pool;
 
