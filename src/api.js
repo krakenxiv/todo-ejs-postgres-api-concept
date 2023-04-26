@@ -23,11 +23,11 @@ app.use(
     extended: false,
   })
 );
-const corsOptions = {
-  // origin: 'http://localhost:3000',
-  origin: [process.env.TODO_UI_LOCAL_HOST, process.env.TODO_DATA_HOST],
-  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
-};
+// const corsOptions = {
+//   origin: [process.env.TODO_UI_LOCAL_HOST, process.env.TODO_DATA_HOST],
+//   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+// };
+const corsOptions = { origin: false };
 
 app.use(cors(corsOptions));
 
