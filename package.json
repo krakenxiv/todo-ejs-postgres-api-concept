@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "cy-build": "node server.js",
-    "cy-start": "node server.js",
-    "cy-dev": "nodemon server.js",
-    "start": "NODE_OPTIONS=--openssl-legacy-provider netlify-lambda serve src",
-    "build": "netlify-lambda build src"
+    "build": "node server.js",
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "nfy-start": "NODE_OPTIONS=--openssl-legacy-provider netlify-lambda serve src",
+    "nfy-build": "netlify-lambda build src"
   },
   "keywords": [],
   "author": "",
