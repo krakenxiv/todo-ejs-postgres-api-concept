@@ -1,6 +1,6 @@
 require('dotenv').config();
 const express = require('express');
-// const serverless = require('serverless-http');
+const serverless = require('serverless-http');
 
 const router = express.Router();
 const db = require('./queries');
@@ -12,7 +12,7 @@ const morgan = require('morgan');
 
 const app = express();
 const port = 3010;
-// module.exports.handler = serverless(app);
+module.exports.handler = serverless(app);
 
 app.use(helmet());
 app.use(bodyParser.json());
@@ -44,7 +44,7 @@ app.listen(port, () => {
   console.log(`App is running on port ${port}`);
 });
 
-// app.use('/.netlify/functions/api', router);
+app.use('/.netlify/functions/api', router);
 
 // TODO! Clean up old code
 // app.get('/', (req, res) => {
