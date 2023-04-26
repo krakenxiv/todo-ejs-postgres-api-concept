@@ -3,7 +3,6 @@ const express = require('express');
 const serverless = require('serverless-http');
 
 const router = express.Router();
-
 const db = require('./queries');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -23,11 +22,10 @@ app.use(
     extended: false,
   })
 );
-// const corsOptions = {
-//   origin: [process.env.TODO_UI_LOCAL_HOST, process.env.TODO_DATA_HOST],
-//   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
-// };
-const corsOptions = { origin: false };
+const corsOptions = {
+  origin: [process.env.TODO_UI_LOCAL_HOST, process.env.TODO_DATA_HOST],
+  optionsSuccessStatus: 200, //  some legacy browsers (IE11, various SmartTVs) choke on 204
+};
 
 app.use(cors(corsOptions));
 
