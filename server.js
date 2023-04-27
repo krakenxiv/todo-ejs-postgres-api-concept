@@ -36,5 +36,5 @@ app.put('/todos', db.updateTodo);
 app.delete('/todos/:id', db.deleteTodo);
 
 app.listen(port, () => {
-  console.log(`App is DA running on port ${port}`);
+  console.log(`App is running on port ${port}`);
 });

@@ -1,20 +1,6 @@
 // TODO!! write basic tests
+const sanitizeHtml = require('sanitize-html');
 const { response } = require('express');
-// const postgres = require('postgres');
-// // const db = require('./db');
-// // const { sql } = require('./db');
-
-// async function getTodos(req, res) {
-//   const users = await sql`
-//     select * from todos
-//   `;
-//   console.log(users[1]);
-//   // users = Result [{ name: "Walter", age: 80 }, { name: 'Murray', age: 68 }, ...]
-//   return users;
-//   // res.status(200).json(users);
-// }
-
-// getTodos();
 
 const Pool = require('pg').Pool;
 
@@ -48,9 +34,11 @@ const getTodoById = (req, res) => {
 
 const createTodo = (req, res) => {
   const { todo_name, todo_description, completed } = req.body;
+  const sanitized_todo_name = sanitizeHtml(todo_name);
+  const sanitized_todo_description = sanitizeHtml(todo_description);
   pool.query(
     'INSERT INTO todos ( todo_name, todo_description, completed) VALUES ($1, $2, $3) RETURNING *',
-    [todo_name, todo_description, completed],
+    [sanitized_todo_name, sanitized_todo_description, completed],
     (error, results) => {
       if (error) {
         throw error;
@@ -64,8 +52,8 @@ const updateTodo = (req, res) => {
   if (req.body.id) {
     const values = [
       req.body.id,
-      req.body.todo_name,
-      req.body.todo_description,
+      sanitizeHtml(req.body.todo_name),
+      sanitizeHtml(req.body.todo_description),
       req.body.completed,
     ];
     pool.query(
@@ -91,7 +79,6 @@ const updateTodo = (req, res) => {
 
 const deleteTodo = (req, res) => {
   const id = req.params.id;
-  // pool.query(`DELETE FROM todos WHERE id = ${id}`, [ id ], (error, results) => {
   pool.query(`DELETE FROM todos WHERE id = ${id}`, (error, results) => {
     if (error) {
       throw error;
